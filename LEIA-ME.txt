@@ -1,0 +1,102 @@
+═══════════════════════════════════════════════════════════════════
+         BEM-VINDO AO SITE DE EXPLICAÇÕES DE MATEMÁTICA
+═══════════════════════════════════════════════════════════════════
+
+Olá! 👋
+
+Está a ver erros no deploy? NÃO se preocupe - é normal e muito fácil
+de resolver!
+
+═══════════════════════════════════════════════════════════════════
+  🚨 SE VÊ ESTES ERROS:
+═══════════════════════════════════════════════════════════════════
+
+❌ Error while deploying: ... failed with status 403
+❌ Error fetching materials: Erro ao carregar materiais
+
+═══════════════════════════════════════════════════════════════════
+  ✅ SOLUÇÃO EM 1 MINUTO:
+═══════════════════════════════════════════════════════════════════
+
+Abra este arquivo:  SOLUCAO_RAPIDA.md
+
+Ou siga estes 3 passos:
+
+1️⃣  Ir para:
+    https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/sql
+
+2️⃣  Copiar e colar o conteúdo de: supabase-setup.sql
+
+3️⃣  Clicar RUN → Aguardar 2 minutos → Recarregar página (F5)
+
+PRONTO! ✅
+
+═══════════════════════════════════════════════════════════════════
+  📚 ONDE ENCONTRAR AJUDA:
+═══════════════════════════════════════════════════════════════════
+
+Temos 11 arquivos de documentação para ajudá-lo:
+
+Mais Simples:
+  • INDEX.txt              → Índice de todos os arquivos
+  • SOLUCAO_RAPIDA.md      → Resolver AGORA (2 min)
+  • COMANDOS_RAPIDOS.txt   → Links e comandos prontos
+
+Tutoriais:
+  • GUIA_VISUAL.txt        → Passo-a-passo visual
+  • INICIO_RAPIDO.md       → Setup completo (5 min)
+  • COMECE_AQUI.md         → Guia de navegação
+
+Completa:
+  • README.md              → Documentação completa
+  • SETUP_SUPABASE.md      → Config detalhada
+  • RESOLVER_ERRO_403.md   → Troubleshooting
+
+Avançado:
+  • RESUMO_EXECUTIVO.md    → Visão técnica
+  • CONFIGURACAO_EMAIL.md  → Setup de emails
+
+
+═══════════════════════════════════════════════════════════════════
+  🎯 RECOMENDAÇÃO:
+═══════════════════════════════════════════════════════════════════
+
+1. Abrir: INDEX.txt (para navegar todos os arquivos)
+   
+   OU
+
+2. Abrir: SOLUCAO_RAPIDA.md (para resolver os erros agora)
+
+
+═══════════════════════════════════════════════════════════════════
+  💡 DICA:
+═══════════════════════════════════════════════════════════════════
+
+O site está 100% funcional! Só precisa de 1 configuração inicial
+no Supabase (criar uma tabela no banco de dados).
+
+Depois disso, tudo funciona perfeitamente:
+  ✅ Login de alunos e admin
+  ✅ Upload de ficheiros
+  ✅ Download de materiais
+  ✅ Formulário de contactos
+  ✅ Envio de emails
+  ✅ Simulador de preços
+
+
+═══════════════════════════════════════════════════════════════════
+  ⏱️ TEMPO ESTIMADO:
+═══════════════════════════════════════════════════════════════════
+
+Setup básico:         2-3 minutos
+Setup completo:       5-7 minutos
+Com configuração de emails: 8-10 minutos
+
+
+═══════════════════════════════════════════════════════════════════
+
+Boa sorte e bom trabalho! 🚀
+
+Qualquer dúvida, consulte INDEX.txt para navegar a documentação.
+
+═══════════════════════════════════════════════════════════════════

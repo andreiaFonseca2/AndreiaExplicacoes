@@ -1,0 +1,81 @@
+═══════════════════════════════════════════════════════════════════
+  🚨 CORRIGIR ERRO 403 - SIGA ESTES PASSOS EXATAMENTE 🚨
+═══════════════════════════════════════════════════════════════════
+
+PASSO 1: Abrir o Supabase SQL Editor
+═══════════════════════════════════════════════════════════════════
+
+Clique neste link (ou copie e cole no browser):
+
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/sql/new
+
+(Ou vá ao Supabase Dashboard → projeto rnfjhzpmduezitzzxbsp → SQL Editor)
+
+
+PASSO 2: Copiar o SQL
+═══════════════════════════════════════════════════════════════════
+
+Abra o arquivo: supabase-setup.sql
+
+Selecione TUDO (Ctrl+A) e copie (Ctrl+C)
+
+
+PASSO 3: Colar e Executar
+═══════════════════════════════════════════════════════════════════
+
+1. Cole o código no SQL Editor do Supabase (Ctrl+V)
+2. Clique no botão "RUN" (ou pressione Ctrl+Enter)
+3. Aguarde até ver: "Success. No rows returned"
+
+
+PASSO 4: Aguardar
+═══════════════════════════════════════════════════════════════════
+
+AGUARDE 1-2 MINUTOS completos.
+
+Não tente fazer nada durante este tempo.
+O Supabase precisa processar as mudanças.
+
+
+PASSO 5: Verificar
+═══════════════════════════════════════════════════════════════════
+
+Volte ao Figma Make e:
+- Recarregue a página (F5)
+- O deploy deve acontecer automaticamente
+- Se ainda mostrar erro, aguarde mais 1 minuto
+
+
+═══════════════════════════════════════════════════════════════════
+  ✅ PRONTO! O ERRO 403 DEVE ESTAR RESOLVIDO
+═══════════════════════════════════════════════════════════════════
+
+Se ainda tiver problemas após seguir TODOS os passos:
+
+1. Verifique se executou o SQL no projeto correto (rnfjhzpmduezitzzxbsp)
+2. Vá a Database → Tables e confirme que existe: kv_store_0af0fbad
+3. Vá a Storage e confirme que existe: make-0af0fbad-materials
+
+
+Link direto para verificar tabelas:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/database/tables
+
+Link direto para verificar storage:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/storage/buckets
+
+
+═══════════════════════════════════════════════════════════════════
+
+POR QUE ISSO FUNCIONA?
+
+O erro 403 acontece porque a Edge Function precisa da tabela
+kv_store_0af0fbad para funcionar. Sem ela, o deploy falha.
+
+Ao executar o SQL, você:
+✓ Cria a tabela necessária
+✓ Cria o bucket de storage
+✓ Configura as permissões corretas
+
+Depois disso, o deploy funciona automaticamente!
+
+═══════════════════════════════════════════════════════════════════

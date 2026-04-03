@@ -1,0 +1,153 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║         🎯 GUIA VISUAL - CORRIGIR TODOS OS ERROS 🎯             ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+
+┌──────────────────────────────────────────────────────────────────┐
+│  ERRO 1: XHR for edge_functions/make-server/deploy failed 403  │
+└──────────────────────────────────────────────────────────────────┘
+
+   CAUSA: Tabela do banco de dados não existe
+   
+   SOLUÇÃO:
+   ┌────────────────────────────────────────────────────────┐
+   │ 1. Ir para:                                            │
+   │    https://supabase.com/dashboard/project/             │
+   │    rnfjhzpmduezitzzxbsp/sql/new                        │
+   │                                                        │
+   │ 2. Copiar conteúdo de: supabase-setup.sql             │
+   │                                                        │
+   │ 3. Colar no SQL Editor                                 │
+   │                                                        │
+   │ 4. Clicar RUN                                          │
+   │                                                        │
+   │ 5. AGUARDAR 2 MINUTOS                                  │
+   │                                                        │
+   │ 6. Recarregar página do Figma Make (F5)               │
+   └────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────┐
+│  ERRO 2: Error fetching materials: Erro ao carregar materiais   │
+└──────────────────────────────────────────────────────────────────┘
+
+   CAUSA: Mesma do Erro 1 - tabela não existe
+   
+   SOLUÇÃO: Execute o mesmo procedimento acima ↑
+   
+   ⚠️  Este erro DESAPARECE automaticamente após:
+       - Executar o SQL
+       - Deploy da Edge Function estar completo
+       - Fazer login novamente no site
+
+
+═══════════════════════════════════════════════════════════════════
+  ✅ CHECKLIST DE VERIFICAÇÃO
+═══════════════════════════════════════════════════════════════════
+
+Antes de continuar, verifique:
+
+[ ] Executou o SQL no projeto correto (rnfjhzpmduezitzzxbsp)
+[ ] Viu a mensagem "Success" no SQL Editor
+[ ] Aguardou pelo menos 2 minutos
+[ ] Recarregou a página do Figma Make (F5)
+
+
+═══════════════════════════════════════════════════════════════════
+  🧪 TESTES PARA CONFIRMAR QUE ESTÁ TUDO OK
+═══════════════════════════════════════════════════════════════════
+
+1. HEALTH CHECK
+   ┌────────────────────────────────────────────────────────┐
+   │ Abrir no browser:                                      │
+   │ https://rnfjhzpmduezitzzxbsp.supabase.co/             │
+   │ functions/v1/make-server-0af0fbad/health               │
+   │                                                        │
+   │ ✅ Deve mostrar: {"status":"ok"}                       │
+   └────────────────────────────────────────────────────────┘
+
+2. VERIFICAR TABELA
+   ┌────────────────────────────────────────────────────────┐
+   │ Ir para:                                               │
+   │ https://supabase.com/dashboard/project/                │
+   │ rnfjhzpmduezitzzxbsp/database/tables                   │
+   │                                                        │
+   │ ✅ Deve ver: kv_store_0af0fbad na lista               │
+   └────────────────────────────────────────────────────────┘
+
+3. VERIFICAR STORAGE
+   ┌────────────────────────────────────────────────────────┐
+   │ Ir para:                                               │
+   │ https://supabase.com/dashboard/project/                │
+   │ rnfjhzpmduezitzzxbsp/storage/buckets                   │
+   │                                                        │
+   │ ✅ Deve ver: make-0af0fbad-materials na lista         │
+   └────────────────────────────────────────────────────────┘
+
+4. VERIFICAR EDGE FUNCTION
+   ┌────────────────────────────────────────────────────────┐
+   │ Ir para:                                               │
+   │ https://supabase.com/dashboard/project/                │
+   │ rnfjhzpmduezitzzxbsp/functions                         │
+   │                                                        │
+   │ ✅ make-server deve estar com status ACTIVE (verde)   │
+   └────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════
+  📚 DOCUMENTAÇÃO ADICIONAL
+═══════════════════════════════════════════════════════════════════
+
+Para mais informações, consulte (nesta ordem):
+
+1. SOLUCAO_RAPIDA.md       - Resumo super rápido
+2. LEIA_ISTO_PRIMEIRO.txt  - Primeiros passos
+3. RESOLVER_ERRO_403.md    - Explicação detalhada
+4. INICIO_RAPIDO.md        - Configuração completa
+5. README.md               - Documentação completa
+
+
+═══════════════════════════════════════════════════════════════════
+  🎯 LINHA DO TEMPO ESPERADA
+═══════════════════════════════════════════════════════════════════
+
+00:00  → Executar SQL no Supabase
+00:05  → Ver mensagem "Success"
+00:05  → Começar a aguardar (NÃO mexer em nada!)
+02:00  → Recarregar página do Figma Make (F5)
+02:30  → Deploy automático acontece
+03:00  → Edge Function fica ACTIVE
+03:00  → ✅ TUDO FUNCIONANDO!
+
+
+═══════════════════════════════════════════════════════════════════
+  💡 DICAS IMPORTANTES
+═══════════════════════════════════════════════════════════════════
+
+✓ NÃO tente fazer deploy manualmente durante a espera
+✓ NÃO edite código durante a espera
+✓ SIM aguarde os 2 minutos completos
+✓ SIM recarregue a página do Figma Make depois
+✓ SIM verifique os testes acima para confirmar
+
+
+═══════════════════════════════════════════════════════════════════
+  🚀 DEPOIS DE TUDO FUNCIONAR
+═══════════════════════════════════════════════════════════════════
+
+1. Ir ao site
+2. Clicar em "Registar"
+3. Criar primeiro utilizador (será admin automaticamente)
+4. Fazer login
+5. Começar a usar!
+
+
+═══════════════════════════════════════════════════════════════════
+
+Dúvidas? Leia: RESOLVER_ERRO_403.md para explicação detalhada
+
+Tudo funcionando? Leia: INICIO_RAPIDO.md para próximos passos
+
+═══════════════════════════════════════════════════════════════════

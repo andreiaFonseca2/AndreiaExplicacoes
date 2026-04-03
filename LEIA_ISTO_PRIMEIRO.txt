@@ -1,0 +1,57 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║   🚨 IMPORTANTE: ERRO 403 NO DEPLOY? LEIA ISTO! 🚨              ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+O erro "XHR for edge_functions/make-server/deploy failed with status 403"
+acontece porque a TABELA DO SUPABASE precisa ser criada PRIMEIRO.
+
+
+═══════════════════════════════════════════════════════════════════
+  SOLUÇÃO RÁPIDA (2 minutos):
+═══════════════════════════════════════════════════════════════════
+
+1. Abra: https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/sql
+
+2. Copie TODO o conteúdo do arquivo: supabase-setup.sql
+
+3. Cole no SQL Editor e clique RUN
+
+4. Aguarde 1-2 minutos
+
+5. Recarregue a página do Figma Make (F5)
+
+6. O deploy acontecerá automaticamente! ✅
+
+
+═══════════════════════════════════════════════════════════════════
+  O QUE ISSO FAZ?
+═══════════════════════════════════════════════════════════════════
+
+Cria:
+✓ Tabela kv_store_0af0fbad (para guardar dados)
+✓ Bucket de storage (para guardar ficheiros)
+✓ Políticas de segurança (RLS)
+
+
+═══════════════════════════════════════════════════════════════════
+  DOCUMENTAÇÃO COMPLETA:
+═══════════════════════════════════════════════════════════════════
+
+📖 RESOLVER_ERRO_403.md  - Explicação detalhada do erro
+📖 INICIO_RAPIDO.md      - Guia de configuração completa  
+📖 README.md             - Visão geral do projeto
+
+
+═══════════════════════════════════════════════════════════════════
+  APÓS RESOLVER O ERRO 403:
+═══════════════════════════════════════════════════════════════════
+
+1. Aguarde a Edge Function ficar "Active" (verde)
+2. Aceda ao site e clique em "Registar"
+3. Crie o primeiro utilizador (será admin automaticamente)
+4. Faça login e comece a usar!
+
+
+Qualquer dúvida, consulte: RESOLVER_ERRO_403.md

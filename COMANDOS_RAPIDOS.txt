@@ -1,0 +1,137 @@
+═══════════════════════════════════════════════════════════════════
+  ⚡ COMANDOS RÁPIDOS - COPIAR E USAR ⚡
+═══════════════════════════════════════════════════════════════════
+
+╔═══════════════════════════════════════════════════════════════╗
+║  1. ABRIR SQL EDITOR DO SUPABASE                              ║
+╚═══════════════════════════════════════════════════════════════╝
+
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/sql/new
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║  2. COPIAR ARQUIVO                                            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+Arquivo: supabase-setup.sql
+
+Copiar TUDO (Ctrl+A, depois Ctrl+C)
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║  3. COLAR E EXECUTAR                                          ║
+╚═══════════════════════════════════════════════════════════════╝
+
+1. Colar no SQL Editor (Ctrl+V)
+2. Clicar botão "RUN" (ou Ctrl+Enter)
+3. Aguardar "Success. No rows returned"
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║  4. AGUARDAR                                                  ║
+╚═══════════════════════════════════════════════════════════════╝
+
+AGUARDAR 2 MINUTOS COMPLETOS
+(Não fazer nada durante este tempo)
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║  5. RECARREGAR PÁGINA                                         ║
+╚═══════════════════════════════════════════════════════════════╝
+
+No Figma Make, pressionar F5 (ou Ctrl+R)
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║  ✅ VERIFICAÇÃO: TESTE O HEALTH CHECK                        ║
+╚═══════════════════════════════════════════════════════════════╝
+
+https://rnfjhzpmduezitzzxbsp.supabase.co/functions/v1/make-server-0af0fbad/health
+
+Deve mostrar: {"status":"ok"}
+
+
+═══════════════════════════════════════════════════════════════════
+  🔗 LINKS ÚTEIS PARA COPIAR
+═══════════════════════════════════════════════════════════════════
+
+Dashboard Principal:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp
+
+SQL Editor:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/sql
+
+Edge Functions:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/functions
+
+Database Tables:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/database/tables
+
+Storage Buckets:
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/storage/buckets
+
+Settings (Secrets):
+https://supabase.com/dashboard/project/rnfjhzpmduezitzzxbsp/settings/functions
+
+
+═══════════════════════════════════════════════════════════════════
+  📧 CONFIGURAR EMAILS (OPCIONAL)
+═══════════════════════════════════════════════════════════════════
+
+1. Criar conta: https://resend.com/signup
+
+2. Obter API Key: https://resend.com/api-keys
+
+3. Adicionar no Supabase → Settings → Secrets:
+   Nome: RESEND_API_KEY
+   Valor: (sua chave do Resend)
+
+
+═══════════════════════════════════════════════════════════════════
+  🧪 TESTES APÓS CONFIGURAÇÃO
+═══════════════════════════════════════════════════════════════════
+
+1. Health Check:
+   https://rnfjhzpmduezitzzxbsp.supabase.co/functions/v1/make-server-0af0fbad/health
+   
+   ✅ Esperado: {"status":"ok"}
+
+2. Criar Admin:
+   - Ir ao site → Registar
+   - Preencher dados
+   - Fazer login
+   
+   ✅ Esperado: Redirecionar para /dashboard-admin
+
+3. Upload de Ficheiro:
+   - Dashboard Admin → Arrastar PDF
+   - Categoria: Fichas
+   - Carregar
+   
+   ✅ Esperado: Ficheiro aparece na lista
+
+4. Formulário de Contactos:
+   - Contactos → Preencher
+   - Enviar
+   
+   ✅ Esperado: "Mensagem enviada com sucesso"
+
+
+═══════════════════════════════════════════════════════════════════
+  🆘 PROBLEMAS COMUNS
+═══════════════════════════════════════════════════════════════════
+
+Problema: "Ainda vejo erro 403"
+Solução: Aguardar mais 1-2 minutos e recarregar novamente
+
+Problema: "Health check dá 404"
+Solução: Edge Function ainda está deployando, aguardar mais 1 minuto
+
+Problema: "Erro ao carregar materiais"
+Solução: Fazer logout e login novamente
+
+Problema: "Tabela não existe"
+Solução: Executar o SQL novamente
+
+
+═══════════════════════════════════════════════════════════════════
