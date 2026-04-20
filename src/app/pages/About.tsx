@@ -15,7 +15,7 @@ export function About() {
             <div className="md:flex">
               <div className="md:w-2/5 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center p-8">
                 <img
-                  src="../../../img/AndreiaFoto.jpeg"
+                  src="../sr/img/AndreiaFoto.jpeg"
                   alt="Explicadora de Matemática"
                   className="rounded-lg shadow-xl w-full h-[300px] object-cover"
                 />

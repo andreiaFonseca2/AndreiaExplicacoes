@@ -72,7 +72,7 @@ export function Contact() {
       answer:
         "Normalmente as aulas têm 1 hora de duração. No entanto, é possível ajustar para 1h30 ou 2h, especialmente para preparação de testes ou conteúdos mais extensos. A primeira aula experimental é gratuita.",
     },
-    {
+     {
       question: "Como se processa o pagamento?",
       answer:
         "O pagamento pode ser feito após cada aula (em numerário, MB Way ou transferência bancária) ou mensalmente, conforme a sua preferência.",
