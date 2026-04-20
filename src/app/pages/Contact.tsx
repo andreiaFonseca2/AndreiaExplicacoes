@@ -34,17 +34,22 @@ export function Contact() {
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setFormData({ ...formData, email: value });
+    setFormData((prev) => ({ ...prev, email: value }));
     if (value && !isValidEmail(value)) {
       setErrors((prev) => ({ ...prev, email: "Email inválido. Ex: exemplo@gmail.com" }));
     } else {
       setErrors((prev) => ({ ...prev, email: "" }));
     }
+    if (formData.emailConfirm && value !== formData.emailConfirm) {
+      setErrors((prev) => ({ ...prev, emailConfirm: "Os emails não coincidem." }));
+    } else {
+      setErrors((prev) => ({ ...prev, emailConfirm: "" }));
+    }
   };
 
   const handleEmailConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setFormData({ ...formData, emailConfirm: value });
+    setFormData((prev) => ({ ...prev, emailConfirm: value }));
     if (value && value !== formData.email) {
       setErrors((prev) => ({ ...prev, emailConfirm: "Os emails não coincidem." }));
     } else {
@@ -54,7 +59,7 @@ export function Contact() {
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setFormData({ ...formData, phone: value });
+    setFormData((prev) => ({ ...prev, phone: value }));
     if (value && !isValidPhone(value)) {
       setErrors((prev) => ({ ...prev, phone: "Número inválido. Ex: 912 345 678" }));
     } else {
@@ -203,7 +208,7 @@ export function Contact() {
                       required
                       value={formData.name}
                       onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
+                        setFormData((prev) => ({ ...prev, name: e.target.value }))
                       }
                     />
                   </div>
@@ -260,7 +265,7 @@ export function Contact() {
                       required
                       value={formData.message}
                       onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
+                        setFormData((prev) => ({ ...prev, message: e.target.value }))
                       }
                     />
                   </div>
