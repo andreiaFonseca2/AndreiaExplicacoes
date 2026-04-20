@@ -4,27 +4,63 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
 import { Button } from "../components/ui/button";
-import { Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
+  });
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const isValidPhone = (phone: string) => {
+    // Aceita números portugueses: 9xxxxxxxx ou +351 9xxxxxxxx ou vazio (campo opcional)
+    if (phone === "") return true;
+    return /^(\+351\s?)?(9[1236]\d{7}|2\d{8})$/.test(phone.replace(/\s/g, ""));
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, email: value });
+    if (value && !isValidEmail(value)) {
+      setErrors((prev) => ({ ...prev, email: "Email inválido. Ex: exemplo@gmail.com" }));
+    } else {
+      setErrors((prev) => ({ ...prev, email: "" }));
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, phone: value });
+    if (value && !isValidPhone(value)) {
+      setErrors((prev) => ({ ...prev, phone: "Número inválido. Ex: 912 345 678" }));
+    } else {
+      setErrors((prev) => ({ ...prev, phone: "" }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validação final antes de enviar
     if (!isValidEmail(formData.email)) {
-      toast.error("Por favor introduza um email válido");
+      setErrors((prev) => ({ ...prev, email: "Email inválido. Ex: exemplo@gmail.com" }));
+      return;
+    }
+    if (!isValidPhone(formData.phone)) {
+      setErrors((prev) => ({ ...prev, phone: "Número inválido. Ex: 912 345 678" }));
       return;
     }
 
@@ -42,19 +78,19 @@ export function Contact() {
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
-          _replyto: formData.email,        // para evitar threads no Gmail
+          _replyto: formData.email,
           _captcha: "false",
-          _subject: `Nova mensagem de ${formData.name} - ${Date.now()}`, // assunto único
-          _next: "https://localhost:5173", // evita redirecionamento
+          _subject: `Nova mensagem de ${formData.name} - ${Date.now()}`,
+          _next: "https://localhost:5173",
+          _autoresponse: `Olá ${formData.name}! Recebi a sua mensagem e entrarei em contacto em breve. Obrigada pelo interesse nas minhas explicações! — Andreia Fonseca`,
         }),
       });
 
       if (response.ok) {
-        toast.success("Mensagem enviada com sucesso!");
+        setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
+        setErrors({ email: "", phone: "" });
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        console.error("FormSubmit error:", errorData);
         toast.error("Erro ao enviar mensagem. Tente novamente.");
       }
     } catch (error) {
@@ -65,14 +101,13 @@ export function Contact() {
     setIsSubmitting(false);
   };
 
-  // FAQ data
   const faqs = [
     {
       question: "Quanto tempo dura uma aula?",
       answer:
         "Normalmente as aulas têm 1 hora de duração. No entanto, é possível ajustar para 1h30 ou 2h, especialmente para preparação de testes ou conteúdos mais extensos. A primeira aula experimental é gratuita.",
     },
-     {
+    {
       question: "Como se processa o pagamento?",
       answer:
         "O pagamento pode ser feito após cada aula (em numerário, MB Way ou transferência bancária) ou mensalmente, conforme a sua preferência.",
@@ -132,63 +167,93 @@ export function Contact() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label>Nome</Label>
-                  <Input
-                    required
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                  />
+              {submitted ? (
+                // Mensagem de sucesso após envio
+                <div className="flex flex-col items-center justify-center py-8 text-center gap-4">
+                  <CheckCircle2 className="w-16 h-16 text-green-500" />
+                  <h3 className="text-xl font-semibold text-green-700">
+                    Mensagem enviada com sucesso!
+                  </h3>
+                  <p className="text-gray-600">
+                    Enviámos um email de confirmação para <strong>{formData.email || "o seu endereço"}</strong>.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Caso não tenha recebido, confirme se o email está correto ou verifique a pasta de spam.
+                  </p>
+                  <button
+                    className="mt-4 text-blue-600 underline text-sm"
+                    onClick={() => setSubmitted(false)}
+                  >
+                    Enviar outra mensagem
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <Label>Nome</Label>
+                    <Input
+                      required
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                    />
+                  </div>
 
-                <div>
-                  <Label>Email</Label>
-                  <Input
-                    required
-                    type="email"
-                    placeholder="exemplo@gmail.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                  />
-                </div>
+                  <div>
+                    <Label>Email</Label>
+                    <Input
+                      required
+                      type="email"
+                      placeholder="exemplo@gmail.com"
+                      value={formData.email}
+                      onChange={handleEmailChange}
+                      className={errors.email ? "border-red-500" : ""}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
+                  </div>
 
-                <div>
-                  <Label>Telefone</Label>
-                  <Input
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                  />
-                </div>
+                  <div>
+                    <Label>Telefone <span className="text-gray-400 text-xs">(opcional)</span></Label>
+                    <Input
+                      placeholder="912 345 678"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      className={errors.phone ? "border-red-500" : ""}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
+                  </div>
 
-                <div>
-                  <Label>Mensagem</Label>
-                  <Textarea
-                    required
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                  />
-                </div>
+                  <div>
+                    <Label>Mensagem</Label>
+                    <Textarea
+                      required
+                      value={formData.message}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
+                    />
+                  </div>
 
-                <Button disabled={isSubmitting} className="w-full">
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="animate-spin mr-2" />
-                      A enviar...
-                    </>
-                  ) : (
-                    "Enviar"
-                  )}
-                </Button>
-              </form>
+                  <Button
+                    disabled={isSubmitting || !!errors.email || !!errors.phone}
+                    className="w-full"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="animate-spin mr-2" />
+                        A enviar...
+                      </>
+                    ) : (
+                      "Enviar"
+                    )}
+                  </Button>
+                </form>
+              )}
             </CardContent>
           </Card>
         </div>
