@@ -6,7 +6,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Button } from "../components/ui/button";
 import { Mail, MapPin, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
-
+ 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -20,17 +20,17 @@ export function Contact() {
     email: "",
     phone: "",
   });
-
+ 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
-
+ 
   const isValidPhone = (phone: string) => {
     // Aceita números portugueses: 9xxxxxxxx ou +351 9xxxxxxxx ou vazio (campo opcional)
     if (phone === "") return true;
     return /^(\+351\s?)?(9[1236]\d{7}|2\d{8})$/.test(phone.replace(/\s/g, ""));
   };
-
+ 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFormData({ ...formData, email: value });
@@ -40,7 +40,7 @@ export function Contact() {
       setErrors((prev) => ({ ...prev, email: "" }));
     }
   };
-
+ 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFormData({ ...formData, phone: value });
@@ -50,10 +50,10 @@ export function Contact() {
       setErrors((prev) => ({ ...prev, phone: "" }));
     }
   };
-
+ 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+ 
     // Validação final antes de enviar
     if (!isValidEmail(formData.email)) {
       setErrors((prev) => ({ ...prev, email: "Email inválido. Ex: exemplo@gmail.com" }));
@@ -63,9 +63,9 @@ export function Contact() {
       setErrors((prev) => ({ ...prev, phone: "Número inválido. Ex: 912 345 678" }));
       return;
     }
-
+ 
     setIsSubmitting(true);
-
+ 
     try {
       const response = await fetch("https://formsubmit.co/ajax/5f00616bdbcb18bc00c9a8e2a400c2c9", {
         method: "POST",
@@ -85,7 +85,7 @@ export function Contact() {
           _autoresponse: `Olá ${formData.name}! Recebi a sua mensagem e entrarei em contacto em breve. Obrigada pelo interesse nas minhas explicações! — Andreia Fonseca`,
         }),
       });
-
+ 
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
@@ -97,10 +97,10 @@ export function Contact() {
       console.error(error);
       toast.error("Erro de rede. Verifique a sua ligação.");
     }
-
+ 
     setIsSubmitting(false);
   };
-
+ 
   const faqs = [
     {
       question: "Quanto tempo dura uma aula?",
@@ -128,18 +128,18 @@ export function Contact() {
         "A primeira aula é gratuita e dura 1 hora. Serve para conhecer o método de ensino, avaliar o nível do aluno e definir objetivos.",
     },
   ];
-
+ 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
           Contactos
         </h1>
-
+ 
         <p className="text-xl text-gray-600 text-center mb-12">
           Entre em contacto para agendar a sua primeira aula
         </p>
-
+ 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contact info */}
           <Card>
@@ -157,7 +157,7 @@ export function Contact() {
               </div>
             </CardContent>
           </Card>
-
+ 
           {/* Formulário */}
           <Card>
             <CardHeader>
@@ -199,7 +199,7 @@ export function Contact() {
                       }
                     />
                   </div>
-
+ 
                   <div>
                     <Label>Email</Label>
                     <Input
@@ -214,7 +214,7 @@ export function Contact() {
                       <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                     )}
                   </div>
-
+ 
                   <div>
                     <Label>Telefone <span className="text-gray-400 text-xs">(opcional)</span></Label>
                     <Input
@@ -227,7 +227,7 @@ export function Contact() {
                       <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
-
+ 
                   <div>
                     <Label>Mensagem</Label>
                     <Textarea
@@ -238,7 +238,7 @@ export function Contact() {
                       }
                     />
                   </div>
-
+ 
                   <Button
                     disabled={isSubmitting || !!errors.email || !!errors.phone}
                     className="w-full"
@@ -257,7 +257,7 @@ export function Contact() {
             </CardContent>
           </Card>
         </div>
-
+ 
         {/* FAQ */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-center mb-8">
@@ -285,3 +285,4 @@ export function Contact() {
     </div>
   );
 }
+ 
