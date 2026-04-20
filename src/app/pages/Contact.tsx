@@ -10,15 +10,16 @@ import { toast } from "sonner";
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    emailConfirm: "",
     phone: "",
     message: "",
   });
   const [errors, setErrors] = useState({
     email: "",
+    emailConfirm: "",
     phone: "",
   });
 
@@ -41,6 +42,16 @@ export function Contact() {
     }
   };
 
+  const handleEmailConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, emailConfirm: value });
+    if (value && value !== formData.email) {
+      setErrors((prev) => ({ ...prev, emailConfirm: "Os emails não coincidem." }));
+    } else {
+      setErrors((prev) => ({ ...prev, emailConfirm: "" }));
+    }
+  };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFormData({ ...formData, phone: value });
@@ -56,6 +67,10 @@ export function Contact() {
 
     if (!isValidEmail(formData.email)) {
       setErrors((prev) => ({ ...prev, email: "Email inválido. Ex: exemplo@gmail.com" }));
+      return;
+    }
+    if (formData.email !== formData.emailConfirm) {
+      setErrors((prev) => ({ ...prev, emailConfirm: "Os emails não coincidem." }));
       return;
     }
     if (!isValidPhone(formData.phone)) {
@@ -80,15 +95,13 @@ export function Contact() {
           _replyto: formData.email,
           _captcha: "false",
           _subject: `Nova mensagem de ${formData.name}`,
-          _autoresponse: `Olá ${formData.name}!\n\nObrigada pelo teu contacto. Recebi a tua mensagem e responderei em breve.\n\nCaso tenhas alguma dúvida urgente, podes contactar-me diretamente por email.\n\nCumprimentos,\nAndreia Fonseca\nExplicações de Matemática`,
         }),
       });
 
       if (response.ok) {
-        setSubmittedEmail(formData.email);
         setSubmitted(true);
-        setFormData({ name: "", email: "", phone: "", message: "" });
-        setErrors({ email: "", phone: "" });
+        setFormData({ name: "", email: "", emailConfirm: "", phone: "", message: "" });
+        setErrors({ email: "", emailConfirm: "", phone: "" });
       } else {
         toast.error("Erro ao enviar mensagem. Tente novamente.");
       }
@@ -173,12 +186,7 @@ export function Contact() {
                     Mensagem enviada com sucesso!
                   </h3>
                   <p className="text-gray-600">
-                    Enviámos um email de confirmação para{" "}
-                    <strong>{submittedEmail}</strong>.
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Caso não tenha recebido, confirme se o email está correto
-                    ou verifique a pasta de spam.
+                    Obrigada pelo contacto, responderemos em breve.
                   </p>
                   <button
                     className="mt-4 text-blue-600 underline text-sm"
@@ -216,6 +224,21 @@ export function Contact() {
                   </div>
 
                   <div>
+                    <Label>Confirmar Email</Label>
+                    <Input
+                      required
+                      type="email"
+                      placeholder="exemplo@gmail.com"
+                      value={formData.emailConfirm}
+                      onChange={handleEmailConfirmChange}
+                      className={errors.emailConfirm ? "border-red-500" : ""}
+                    />
+                    {errors.emailConfirm && (
+                      <p className="text-red-500 text-sm mt-1">{errors.emailConfirm}</p>
+                    )}
+                  </div>
+
+                  <div>
                     <Label>
                       Telefone{" "}
                       <span className="text-gray-400 text-xs">(opcional)</span>
@@ -243,7 +266,7 @@ export function Contact() {
                   </div>
 
                   <Button
-                    disabled={isSubmitting || !!errors.email || !!errors.phone}
+                    disabled={isSubmitting || !!errors.email || !!errors.emailConfirm || !!errors.phone}
                     className="w-full"
                   >
                     {isSubmitting ? (
